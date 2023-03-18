@@ -5,7 +5,7 @@
 **Author Name**: Mutaz Abutaha
 
 ## WRRC
-![wrrc image](./Movie%20Data/WhatsApp%20Image%202023-03-18%20at%2017.47.08.jpg/WhatsApp%20Image%202023-03-18%20at%2017.47.08.jpg)
+![wrrc image](./Movie%20Data/WhatsApp%20Image%202023-03-18%20at%2017.47.08.jpg)
 
 ## Overview
 
