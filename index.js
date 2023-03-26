@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 app.use(cors());
 const PORT = process.env.PORT;
 const apiKey = process.env.APIKEY;
-const passWord = process.env.PASSWORD;
 const userName = process.env.USERNAME;
+const passWord = process.env.PASSWORD;
 let url = `postgres://${userName}:${passWord}@localhost:5432/demo`
 const { Client } = require('pg')
 const client = new Client(url)
@@ -114,11 +114,11 @@ function popularHandler(req,res){
 function addMovieHandler(req, res){
     console.log(req.body);
     // res.send('Data recieved');
-    let {title,time,overView}= req.body;
-    console.log(title,time,overView);
-    let sql = `INSERT INTO Movie (title, time, overView)
-    VALUES ($1,$2,$3) RETURNING *; `
-    let values = [title,time,overView];
+    let {title,poster_path,overView,comments}= req.body;
+    console.log(title,poster_path,overView,comments);
+    let sql = `INSERT INTO Movie (title, poster_path, overView, comments)
+    VALUES ($1,$2,$3,$4) RETURNING *; `
+    let values = [title,poster_path,overView,comments];
     client.query(sql,values).then((result)=>{
         console.log(result.rows)
         // res.status(201).send("data successfully saved in db to server")
