@@ -15,10 +15,12 @@
 ## Lab13 WRRC 
 ![Lab13 image](./Movie%20Data/Lab13.png)
 
+## Lab14 WRRC
+![Lab14 image](./Movie%20Data/Lab14.png)
+
 ## Overview
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 * npm init -y
 * npm inistall express nodemon dotenv cors axios
 * const express = require('express');
@@ -59,14 +61,31 @@ client.connect().then(() => {
     });
 })
 * do CRUD by using client.query();
+
+## CRUD APPLICATION 
+* Create (post) (`INSERT INTO Movie (...)
+    VALUES (...) RETURNING *; `)
+    client.query(sql,values).then((result)=>{
+        res.status(201).json(result.rows)}).
+* Read (get) ( `SELECT * FROM movie;`)
+    client.query(sql).then((result)=>{
+        res.json(result.rows)})
+* Update (put) (`UPDATE Movie SET comments = $1
+     WHERE id = $2 RETURNING *;`)  
+     client.query(sql,values).then(result=>{
+        res.send(result.rows) })
+* Delete (delete) (`DELETE FROM Movie WHERE 
+    id = $1;`)  
+     client.query(sql,value).then(result=>{
+        res.status(204).send("deleted");})
+
   
-
-
-
 ## Project Features
-<!-- What are the features included in you app -->
 * when you send request to the home page by get method you will response the json data filtered in new array 
 * when you send request to the favorit page by get method you will response Welcome to Favorite Page 
 * Now i have alot of routs like (trending, search, popular, nowPlaying,...)
-* Now i can add a new tables  to my dataBase 
-* and i can get my data from dataBase
+* Now I can add a new tables  to my dataBase 
+* I can add a new data to my dataBase
+* I can get my data from dataBase
+* I can update my data from dataBase
+* I can delete my data from dataBase
