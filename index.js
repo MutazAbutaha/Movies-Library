@@ -15,7 +15,8 @@ const PORT = process.env.PORT;
 const apiKey = process.env.APIKEY;
 const userName = process.env.USERNAME;
 const passWord = process.env.PASSWORD;
-let url = `postgres://${userName}:${passWord}@localhost:5432/demo`
+const dataBaseName = process.env.DATABASE_NAME;
+let url = `postgres://${userName}:${passWord}@localhost:5432/${dataBaseName}`
 const { Client } = require('pg')
 const client = new Client(url)
 
@@ -29,6 +30,9 @@ app.get('/popular', popularHandler);
 app.get('/nowPlaying', nowPlayingHandler);
 app.post('/addMovie', addMovieHandler);
 app.get('/getMovies', getMoviesHandler);
+app.put('/UPDATE/:id', updateCommentsHandler);
+app.delete('/DELETE/:id', deleteMovieHandler);
+app.get('/getMovie/:id', getMovieIdHandler);
 app.get('*', handelNotFoundError);
 app.use(errorHandler);
 
@@ -140,6 +144,41 @@ function getMoviesHandler(req,res){
     })
 }
 
+function updateCommentsHandler(req,res){
+    let id = req.params.id // params
+    let comments = req.body.comments;
+    let sql=`UPDATE Movie SET comments = $1 WHERE id = $2 RETURNING *;`;
+    let values = [comments,id];
+    client.query(sql,values).then(result=>{
+        console.log(result.rows);
+        res.send(result.rows)
+    }).catch((error)=>{
+        errorHandler(error,req,res);
+    })
+}
+
+function deleteMovieHandler(req,res){
+    let id = req.params.id; 
+    let sql=`DELETE FROM Movie WHERE id = $1;` ;
+    let value = [id];
+    client.query(sql,value).then(result=>{
+        res.status(204).send("deleted");
+    }).catch((error)=>{
+        errorHandler(error,req,res);
+    })
+
+}
+
+function getMovieIdHandler(req,res){
+    let id = req.params.id;
+    let sql =`SELECT * FROM Movie WHERE id = $1;`;
+    let value = [id];
+    client.query(sql,value).then((result)=>{
+        res.json(result.rows)
+    }).catch((error)=>{
+        errorHandler(error,req,res);
+    })
+}
 function handelNotFoundError(req,res){
     res.status(404).send('Not Found');
 }
