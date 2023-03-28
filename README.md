@@ -7,16 +7,16 @@
 ## WRRC
 
 ### Lab11 WRRC
-![Lab11 image](./Movie%20Data/Lab11.png)
+![Lab11 image](./Lab11.png)
 
 ### Lab12 WRRC
-![Lab12 image](./Movie%20Data/Lab12.png)
+![Lab12 image](./Lab12.png)
 
 ## Lab13 WRRC 
-![Lab13 image](./Movie%20Data/Lab13.png)
+![Lab13 image](./Lab13.png)
 
 ## Lab14 WRRC
-![Lab14 image](./Movie%20Data/Lab14.png)
+![Lab14 image](./Lab14.png)
 
 ## Overview
 
@@ -78,6 +78,28 @@ client.connect().then(() => {
     id = $1;`)  
      client.query(sql,value).then(result=>{
         res.status(204).send("deleted");})
+
+## Deploy on Vercel
+* First, add a new property called engines to your `package.json` file
+"engines": {
+    "node": "14.x"
+  }
+* Second, create a new file called `vercel.json` and add the following to it
+{"version": 2,
+    "builds": [
+       { "src": "./index.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+       { "src": "/(.*)", "dest": "/" }
+    ]
+ }
+* Now, you can start the process:
+1. Go to https://www.vercel.com/
+2. create new account and it's gonna ask you to authorize vercel to your Github account
+3. From your dashboard, click on `Add new+` then choose `project` from the drop down list
+4. Under `Import Git Repository`, choose the repo that you want to deploy, then click on `import`
+5. Make everything as default, and you can add your environment variables if you have any
+6. click on `Deploy` (edited) 
 
   
 ## Project Features
