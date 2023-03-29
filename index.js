@@ -2,7 +2,7 @@
 
 //DECLARATION
 const express = require('express');
-const dataJson = require('./Movie Data/data.json');
+const dataJson = require('./data.json');
 const cors = require('cors');
 const axios = require('axios');
 require('dotenv').config()
@@ -13,12 +13,9 @@ app.use(bodyParser.json());
 app.use(cors());
 const PORT = process.env.PORT;
 const apiKey = process.env.APIKEY;
-const userName = process.env.USERNAME;
-const passWord = process.env.PASSWORD;
-const dataBaseName = process.env.DATABASE_NAME;
-let url = `postgres://${userName}:${passWord}@localhost:5432/${dataBaseName}`
-const { Client } = require('pg')
-const client = new Client(url)
+let url = process.env.URL;
+const { Client } = require('pg');
+const client = new Client(url);
 
 
 //ROUTS
