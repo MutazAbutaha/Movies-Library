@@ -79,7 +79,7 @@ client.connect().then(() => {
      client.query(sql,value).then(result=>{
         res.status(204).send("deleted");})
 
-## Deploy on Vercel
+## Deploy Project Vercel
 * First, add a new property called engines to your `package.json` file
 "engines": {
     "node": "14.x"
@@ -101,6 +101,16 @@ client.connect().then(() => {
 5. Make everything as default, and you can add your environment variables if you have any
 6. click on `Deploy` (edited) 
 
+## database deployment :
+* Deploy the database using ElephantSQL
+*  go to https://www.elephantsql.com/
+* create a new account
+* click on + Create New Instance in order to create a new database.
+* Add the database name in the Name field, and keep the rest as default
+*  Click on Select Region, then choose the server that you would like to create our database in. We recommend   selecting the closet server to you geographically.
+* Click on Review
+* Click on Create Instance
+* Click on your new created database so you can get the URL of your database and add it as environment variable to your deployed node app on  Vercel.
   
 ## Project Features
 * when you send request to the home page by get method you will response the json data filtered in new array 
